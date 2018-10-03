@@ -1,10 +1,14 @@
-def get_first_name_of_season_winner(data, season)
+def get_average_age_for_season(data, season)
+  age_total = 0
+  num_of_contestants = 0
   data[season].each do |contestant_hash|
-    if contestant_hash["status"].downcase == "winner"
-      return contestant_hash["name"].split(" ").first
-    end
+    age_total += (contestant_hash["age"]).to_i
+    num_of_contestants += 1
   end
+  (age_total / num_of_contestants.to_f).round(0)
 end
+
+
 
 def get_contestant_name(data, occupation)
   data.each do |season, contestants|
@@ -38,12 +42,10 @@ def get_occupation(data, hometown)
   end
 end
 
-def get_average_age_for_season(data, season)
-  age_total = 0
-  num_of_contestants = 0
+def get_first_name_of_season_winner(data, season)
   data[season].each do |contestant_hash|
-    age_total += (contestant_hash["age"]).to_i
-    num_of_contestants += 1
+    if contestant_hash["status"].downcase == "winner"
+      return contestant_hash["name"].split(" ").first
+    end
   end
-  (age_total / num_of_contestants.to_f).round(0)
 end
